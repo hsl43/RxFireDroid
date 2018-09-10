@@ -1,0 +1,39 @@
+buildscript {
+    ext {
+        kotlin_version             = '1.2.51'
+        support_lib_version        = '27.1.1'
+        firebase_core_version      = '16.0.3'
+        firebase_auth_version      = '16.0.3'
+        firebase_config_version    = '16.0.0'
+        firebase_database_version  = '16.0.2'
+        firebase_firestore_version = '17.1.0'
+        firebase_messaging_version = '17.3.1'
+        firebase_storage_version   = '16.0.2'
+        player_services_version    = '16.0.0'
+        junit_version              = '4.12'
+        assertj_version            = '3.9.1'
+        mockito_version            = '1.10.19'
+    }
+
+    repositories {
+        google()
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.1.4'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath 'com.google.gms:google-services:4.0.1'
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

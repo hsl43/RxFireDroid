@@ -1,0 +1,17 @@
+*.log
+*.iml
+*.iws
+*.ipr
+.idea/
+.gradle/
+local.properties
+
+**/*.iml
+**/build/
+
+*~
+*.swp
+*.hprof
+**/.DS_Store
+
+captures/

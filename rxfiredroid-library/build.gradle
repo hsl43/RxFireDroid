@@ -1,0 +1,47 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+
+android {
+    compileSdkVersion 27
+
+    defaultConfig {
+        minSdkVersion 16
+        targetSdkVersion 27
+        versionCode 1
+        versionName '1.0'
+        testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    api 'io.reactivex.rxjava2:rxjava:2.2.1'
+    api 'io.reactivex.rxjava2:rxkotlin:2.3.0'
+    api("com.android.support:appcompat-v7:$support_lib_version") {
+        exclude group: 'com.android.support', module: 'support-media-compat'
+    }
+    api "com.google.firebase:firebase-auth:$firebase_auth_version"
+    api("com.google.firebase:firebase-config:$firebase_config_version") {
+        exclude group: 'com.google.android.gms', module: 'play-services-measurement-base'
+        exclude group: 'com.google.firebase', module: 'firebase-analytics-impl'
+    }
+    api "com.google.firebase:firebase-database:$firebase_database_version"
+    api "com.google.firebase:firebase-firestore:$firebase_firestore_version"
+    api "com.google.firebase:firebase-messaging:$firebase_messaging_version"
+    api "com.google.firebase:firebase-storage:$firebase_storage_version"
+    api "com.google.android.gms:play-services-auth:$player_services_version"
+    api 'com.twitter.sdk.android:twitter-core:3.1.1'
+    testImplementation "junit:junit:$junit_version"
+    testImplementation "org.assertj:assertj-core:$assertj_version"
+    testImplementation "org.mockito:mockito-all:$mockito_version"
+    androidTestImplementation('com.android.support.test:runner:1.0.2') {
+        exclude group: 'com.android.support', module: 'support-media-compat'
+    }
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+}
