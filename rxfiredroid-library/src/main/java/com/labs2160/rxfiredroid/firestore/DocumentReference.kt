@@ -47,7 +47,11 @@ interface DocumentReference {
    * Starts listening to the document referenced by this DocumentReference with
    * the given options.
    */
-  fun addSnapshotListener(metadataChanges: MetadataChanges, listener: EventListener<GoogleDocumentSnapshot>): ListenerRegistration
+  fun addSnapshotListener(
+      metadataChanges: MetadataChanges,
+      listener: EventListener<GoogleDocumentSnapshot>
+
+  ): ListenerRegistration
 
   /**
    * Starts listening to the document referenced by this DocumentReference.
@@ -71,6 +75,9 @@ interface DocumentReference {
    */
   fun collection(path: String): GoogleCollectionReference
 
+  /**
+   * For internal use in RxFireDroid only.
+   */
   fun delegate(): GoogleDocumentReference
 
   /**
@@ -110,6 +117,7 @@ interface DocumentReference {
    * Starts observing the document referenced by this DocumentReference with
    * the given options using an Activity-scoped listener.
    */
+  @Suppress("unused")
   fun rxBindSnapshot(activity: Activity, metadataChanges: MetadataChanges): Flowable<DocumentSnapshot> {
     return this.rxBindSnapshot(activity, metadataChanges, Defaults.BACKPRESSURE_STRATEGY)
   }
@@ -129,6 +137,7 @@ interface DocumentReference {
    * Starts observing the document referenced by this DocumentReference with
    * the given options.
    */
+  @Suppress("unused")
   fun rxBindSnapshot(executor: Executor, metadataChanges: MetadataChanges): Flowable<DocumentSnapshot> {
     return this.rxBindSnapshot(executor, metadataChanges, Defaults.BACKPRESSURE_STRATEGY)
   }
@@ -148,6 +157,7 @@ interface DocumentReference {
    * Starts observing the document referenced by this DocumentReference with
    * the given options.
    */
+  @Suppress("unused")
   fun rxBindSnapshot(metadataChanges: MetadataChanges): Flowable<DocumentSnapshot> {
     return this.rxBindSnapshot(metadataChanges, Defaults.BACKPRESSURE_STRATEGY)
   }
@@ -161,6 +171,7 @@ interface DocumentReference {
   /**
    * Starts observing the document referenced by this DocumentReference.
    */
+  @Suppress("unused")
   fun rxBindSnapshot(): Flowable<DocumentSnapshot> {
     return this.rxBindSnapshot(Defaults.BACKPRESSURE_STRATEGY)
   }
@@ -173,6 +184,7 @@ interface DocumentReference {
   /**
    * Starts observing the document referenced by this DocumentReference.
    */
+  @Suppress("unused")
   fun rxBindSnapshot(executor: Executor): Flowable<DocumentSnapshot> {
     return this.rxBindSnapshot(executor, Defaults.BACKPRESSURE_STRATEGY)
   }
@@ -186,6 +198,7 @@ interface DocumentReference {
    * Starts observing the document referenced by this DocumentReference
    * using an Activity-scoped listener.
    */
+  @Suppress("unused")
   fun rxBindSnapshot(activity: Activity): Flowable<DocumentSnapshot> {
     return this.rxBindSnapshot(activity, Defaults.BACKPRESSURE_STRATEGY)
   }

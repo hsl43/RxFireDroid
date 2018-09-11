@@ -1,8 +1,8 @@
 package com.labs2160.rxfiredroid.firestore
 
-import com.google.firebase.firestore.DocumentChange
 import com.google.firebase.firestore.MetadataChanges
 import com.google.firebase.firestore.SnapshotMetadata
+import com.google.firebase.firestore.DocumentChange as GoogleDocumentChange
 import com.google.firebase.firestore.DocumentSnapshot as GoogleDocumentSnapshot
 import com.google.firebase.firestore.Query as GoogleQuery
 import com.google.firebase.firestore.QuerySnapshot as GoogleQuerySnapshot
@@ -17,12 +17,12 @@ interface QuerySnapshot : Iterable<QueryDocumentSnapshot>{
   /**
    * Returns the list of documents that changed since the last snapshot.
    */
-  fun getDocumentChanges(): List<DocumentChange>
+  fun getDocumentChanges(): List<GoogleDocumentChange>
 
   /**
    * Returns the list of documents that changed since the last snapshot.
    */
-  fun getDocumentChanges(metadataChanges: MetadataChanges): List<DocumentChange>
+  fun getDocumentChanges(metadataChanges: MetadataChanges): List<GoogleDocumentChange>
 
   /**
    * Returns the documents in this QuerySnapshot as a List in order of the
@@ -42,12 +42,22 @@ interface QuerySnapshot : Iterable<QueryDocumentSnapshot>{
   override fun iterator(): Iterator<QueryDocumentSnapshot>
 
   /**
+   * Returns the list of documents that changed since the last snapshot.
+   */
+  fun rxGetDocumentChanges(): List<DocumentChange>
+
+  /**
+   * Returns the list of documents that changed since the last snapshot.
+   */
+  fun rxGetDocumentChanges(metadataChanges: MetadataChanges): List<DocumentChange>
+
+  /**
    * Returns the documents in this QuerySnapshot as a List in order of the
    * query.
    */
   fun rxGetDocuments(): List<DocumentSnapshot>
 
-//  fun rxGetQuery(): Query  // TODO
+  fun rxGetQuery(): Query
 
   /**
    * Returns the number of documents in the QuerySnapshot.

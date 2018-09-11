@@ -32,6 +32,53 @@ interface WriteBatch {
   /**
    * Overwrites the document referred to by the provided DocumentReference.
    */
+  fun rxSet(documentRef: DocumentReference, data: Map<String,Any>): WriteBatch
+
+  /**
+   * Writes to the document referred to by the provided DocumentReference.
+   */
+  fun rxSet(documentRef: DocumentReference, data: Map<String,Any>, options: SetOptions): WriteBatch
+
+  /**
+   * Overwrites the document referred to by the provided DocumentReference.
+   */
+  fun rxSet(documentRef: DocumentReference, pojo: Any): WriteBatch
+
+  /**
+   * Writes to the document referred to by the provided DocumentReference.
+   */
+  fun rxSet(documentRef: DocumentReference, pojo: Any, options: SetOptions): WriteBatch
+
+  /**
+   * Updates fields in the document referred to by the provided DocumentReference.
+   */
+  fun rxUpdate(documentRef: DocumentReference, data: Map<String,Any>): WriteBatch
+
+  /**
+   * Updates field in the document referred to by the provided DocumentReference.
+   */
+  fun rxUpdate(
+      documentRef: DocumentReference,
+      field: String,
+      value: Any,
+      vararg moreFieldsAndValues: Any
+
+  ): WriteBatch
+
+  /**
+   * Updates fields in the document referred to by the provided DocumentReference.
+   */
+  fun rxUpdate(
+      documentRef: DocumentReference,
+      fieldPath: FieldPath,
+      value: Any,
+      vararg moreFieldsAndValues: Any
+
+  ): WriteBatch
+
+  /**
+   * Overwrites the document referred to by the provided DocumentReference.
+   */
   fun set(documentRef: GoogleDocumentReference, data: Map<String,Any>): GoogleWriteBatch
 
   /**

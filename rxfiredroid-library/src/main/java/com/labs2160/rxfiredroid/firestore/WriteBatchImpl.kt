@@ -10,7 +10,7 @@ import com.google.firebase.firestore.WriteBatch as GoogleWriteBatch
 
 @Suppress("unused")
 internal class WriteBatchImpl(private val delegate: GoogleWriteBatch) : WriteBatch {
-  override fun commit(): Task<Void> {
+override fun commit(): Task<Void> {
     return delegate.commit()
   }
 
@@ -23,6 +23,58 @@ internal class WriteBatchImpl(private val delegate: GoogleWriteBatch) : WriteBat
       delegate.commit()
           .addRxOnCompleteListener(emitter, "Unexpected error in rxCommit()")
     }
+  }
+
+  override fun rxSet(documentRef: DocumentReference, data: Map<String,Any>): WriteBatch {
+    return WriteBatch.newInstance(delegate.set(documentRef.delegate(), data))
+  }
+
+  override fun rxSet(documentRef: DocumentReference, data: Map<String,Any>, options: SetOptions): WriteBatch {
+    return WriteBatch.newInstance(delegate.set(documentRef.delegate(), data, options))
+  }
+
+  override fun rxSet(documentRef: DocumentReference, pojo: Any): WriteBatch {
+    return WriteBatch.newInstance(delegate.set(documentRef.delegate(), pojo))
+  }
+
+  override fun rxSet(documentRef: DocumentReference, pojo: Any, options: SetOptions): WriteBatch {
+    return WriteBatch.newInstance(delegate.set(documentRef.delegate(), pojo, options))
+  }
+
+  override fun rxUpdate(documentRef: DocumentReference, data: Map<String,Any>): WriteBatch {
+    return WriteBatch.newInstance(delegate.update(documentRef.delegate(), data))
+  }
+
+  override fun rxUpdate(
+      documentRef: DocumentReference,
+      field: String,
+      value: Any,
+      vararg moreFieldsAndValues: Any
+
+  ): WriteBatch {
+
+    return WriteBatch.newInstance(delegate.update(
+        documentRef.delegate(),
+        field,
+        value,
+        moreFieldsAndValues
+    ))
+  }
+
+  override fun rxUpdate(
+      documentRef: DocumentReference,
+      fieldPath: FieldPath,
+      value: Any,
+      vararg moreFieldsAndValues: Any
+
+  ): WriteBatch {
+
+    return WriteBatch.newInstance(delegate.update(
+        documentRef.delegate(),
+        fieldPath,
+        value,
+        moreFieldsAndValues
+    ))
   }
 
   override fun set(documentRef: GoogleDocumentReference, data: Map<String,Any>): GoogleWriteBatch {

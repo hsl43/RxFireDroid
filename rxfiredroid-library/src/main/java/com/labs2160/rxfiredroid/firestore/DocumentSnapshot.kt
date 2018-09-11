@@ -12,7 +12,7 @@ import com.google.firebase.firestore.DocumentSnapshot as GoogleDocumentSnapshot
 interface DocumentSnapshot {
   companion object {
     fun newInstance(googleDocumentSnapshot: GoogleDocumentSnapshot): DocumentSnapshot {
-      return DocumentSnapshotImpl(googleDocumentSnapshot)
+      return QueryDocumentSnapshotImpl(googleDocumentSnapshot)
     }
   }
 

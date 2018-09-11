@@ -18,7 +18,15 @@ interface Transaction {
    */
   fun delete(documentRef: GoogleDocumentReference): GoogleTransaction
 
+  /**
+   * For internal use in RxFireDroid only.
+   */
   fun delegate(): GoogleTransaction
+
+  /**
+   * Reads the document referenced by this DocumentReference
+   */
+  fun get(documentRef: GoogleDocumentReference): GoogleDocumentSnapshot
 
   /**
    * Deletes the document referred to by the provided DocumentReference.
@@ -79,11 +87,6 @@ interface Transaction {
       vararg moreFieldsAndValues: Any
 
   ): Transaction
-
-  /**
-   * Reads the document referenced by this DocumentReference
-   */
-  fun get(documentRef: GoogleDocumentReference): GoogleDocumentSnapshot
 
   /**
    * Overwrites the document referred to by the provided DocumentReference.

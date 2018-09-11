@@ -1,115 +1,133 @@
 package com.labs2160.rxfiredroid.firestore
 
 import com.google.firebase.Timestamp
-import com.google.firebase.firestore.*
-import com.google.firebase.firestore.DocumentSnapshot
+import com.google.firebase.firestore.Blob
+import com.google.firebase.firestore.FieldPath
+import com.google.firebase.firestore.GeoPoint
+import com.google.firebase.firestore.SnapshotMetadata
 import java.util.*
 import com.google.firebase.firestore.DocumentReference as GoogleDocumentReference
+import com.google.firebase.firestore.DocumentSnapshot as GoogleDocumentSnapshot
 import com.google.firebase.firestore.QueryDocumentSnapshot as GoogleQueryDocumentSnapshot
 
-internal class QueryDocumentSnapshotImpl(private val delegate: GoogleQueryDocumentSnapshot) : QueryDocumentSnapshot {
-  override fun getData(serverTimestampBehavior: DocumentSnapshot.ServerTimestampBehavior): Map<String,Any> {
-    return delegate.getData(serverTimestampBehavior)
+internal class QueryDocumentSnapshotImpl(
+    private var documentDelegate: GoogleDocumentSnapshot? = null,
+    private var queryDocumentDelegate: GoogleQueryDocumentSnapshot? = null
+
+) : QueryDocumentSnapshot {
+
+  override fun getData(serverTimestampBehavior: GoogleDocumentSnapshot.ServerTimestampBehavior): Map<String,Any> {
+    return (queryDocumentDelegate ?: documentDelegate)?.getData(serverTimestampBehavior)
+        ?: throw IllegalStateException("getData() was invoked without a backing delegate")
   }
 
   override fun getData(): Map<String,Any> {
-    return delegate.data
+    return (queryDocumentDelegate ?: documentDelegate)?.data
+        ?: throw IllegalStateException("getData() was invoked without a backing delegate")
   }
 
   override fun <T> toObject(valueType: Class<T>): T {
-    return delegate.toObject(valueType)
+    return (queryDocumentDelegate ?: documentDelegate)?.toObject(valueType)
+        ?: throw IllegalStateException("toObject() was invoked without a backing delegate")
   }
 
-  override fun <T> toObject(valueType: Class<T>, serverTimestampBehavior: DocumentSnapshot.ServerTimestampBehavior): T {
-    return delegate.toObject(valueType, serverTimestampBehavior)
+  override fun <T> toObject(valueType: Class<T>, serverTimestampBehavior: GoogleDocumentSnapshot.ServerTimestampBehavior): T {
+    return (queryDocumentDelegate ?: documentDelegate)?.toObject(valueType, serverTimestampBehavior)
+        ?: throw IllegalStateException("toObject() was invoked without a backing delegate")
   }
 
   override fun contains(fieldPath: FieldPath): Boolean {
-    return delegate.contains(fieldPath)
+    return documentDelegate?.contains(fieldPath)
+        ?: throw IllegalStateException("contains() was invoked without a backing DocumentSnapshot")
   }
 
   override fun contains(field: String): Boolean {
-    return delegate.contains(field)
+    return documentDelegate?.contains(field)
+        ?: throw IllegalStateException("contains() was invoked without a backing DocumentSnapshot")
   }
 
   override fun exists(): Boolean {
-    return delegate.exists()
+    return documentDelegate?.exists()
+        ?: throw IllegalStateException("exists() was invoked without a backing DocumentSnapshot")
   }
 
-  override fun get(field: String, serverTimestampBehavior: DocumentSnapshot.ServerTimestampBehavior): Any? {
-    return delegate.get(field, serverTimestampBehavior)
+  override fun get(field: String, serverTimestampBehavior: GoogleDocumentSnapshot.ServerTimestampBehavior): Any? {
+    return documentDelegate?.get(field, serverTimestampBehavior)
   }
 
   override fun get(fieldPath: FieldPath): Any? {
-    return delegate.get(fieldPath)
+    return documentDelegate?.get(fieldPath)
   }
 
-  override fun get(fieldPath: FieldPath, serverTimestampBehavior: DocumentSnapshot.ServerTimestampBehavior): Any? {
-    return delegate.get(fieldPath, serverTimestampBehavior)
+  override fun get(fieldPath: FieldPath, serverTimestampBehavior: GoogleDocumentSnapshot.ServerTimestampBehavior): Any? {
+    return documentDelegate?.get(fieldPath, serverTimestampBehavior)
   }
 
   override fun get(field: String): Any? {
-    return delegate.get(field)
+    return documentDelegate?.get(field)
   }
 
   override fun getBlob(field: String): Blob? {
-    return delegate.getBlob(field)
+    return documentDelegate?.getBlob(field)
   }
 
   override fun getBoolean(field: String): Boolean? {
-    return delegate.getBoolean(field)
+    return documentDelegate?.getBoolean(field)
   }
 
   override fun getDate(field: String): Date? {
-    return delegate.getDate(field)
+    return documentDelegate?.getDate(field)
   }
 
-  override fun getDate(field: String, serverTimestampBehavior: DocumentSnapshot.ServerTimestampBehavior): Date? {
-    return delegate.getDate(field, serverTimestampBehavior)
+  override fun getDate(field: String, serverTimestampBehavior: GoogleDocumentSnapshot.ServerTimestampBehavior): Date? {
+    return documentDelegate?.getDate(field, serverTimestampBehavior)
   }
 
   override fun getDocumentReference(field: String): GoogleDocumentReference? {
-    return delegate.getDocumentReference(field)
+    return documentDelegate?.getDocumentReference(field)
   }
 
   override fun getDouble(field: String): Double? {
-    return delegate.getDouble(field)
+    return documentDelegate?.getDouble(field)
   }
 
   override fun getGeoPoint(field: String): GeoPoint? {
-    return delegate.getGeoPoint(field)
+    return documentDelegate?.getGeoPoint(field)
   }
 
   override fun getId(): String {
-    return delegate.id
+    return documentDelegate?.id
+        ?: throw IllegalStateException("getId() was invoked without a backing DocumentSnapshot")
   }
 
   override fun getLong(field: String): Long? {
-    return delegate.getLong(field)
+    return documentDelegate?.getLong(field)
   }
 
   override fun getMetadata(): SnapshotMetadata {
-    return delegate.metadata
+    return documentDelegate?.metadata
+        ?: throw IllegalStateException("getMetadata() was invoked without a backing DocumentSnapshot")
   }
 
   override fun getReference(): GoogleDocumentReference {
-    return delegate.reference
+    return documentDelegate?.reference
+        ?: throw IllegalStateException("getReference() was invoked without a backing DocumentSnapshot")
   }
 
   override fun getString(field: String): String? {
-    return delegate.getString(field)
+    return documentDelegate?.getString(field)
   }
 
-  override fun getTimestamp(field: String, serverTimestampBehavior: DocumentSnapshot.ServerTimestampBehavior): Timestamp? {
-    return delegate.getTimestamp(field, serverTimestampBehavior)
+  override fun getTimestamp(field: String, serverTimestampBehavior: GoogleDocumentSnapshot.ServerTimestampBehavior): Timestamp? {
+    return documentDelegate?.getTimestamp(field, serverTimestampBehavior)
   }
 
   override fun getTimestamp(field: String): Timestamp? {
-    return delegate.getTimestamp(field)
+    return documentDelegate?.getTimestamp(field)
   }
 
   override fun rxGetDocumentReference(field: String): DocumentReference? {
-    val documentReference = delegate.getDocumentReference(field)
+    val documentReference = documentDelegate?.getDocumentReference(field)
 
     return if(documentReference == null) {
       null
@@ -119,6 +137,6 @@ internal class QueryDocumentSnapshotImpl(private val delegate: GoogleQueryDocume
   }
 
   override fun rxGetReference(): DocumentReference {
-    return DocumentReference.newInstance(delegate.reference)
+    return DocumentReference.newInstance(getReference())
   }
 }

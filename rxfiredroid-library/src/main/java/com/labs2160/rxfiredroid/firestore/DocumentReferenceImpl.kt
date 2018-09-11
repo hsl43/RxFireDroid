@@ -33,7 +33,12 @@ internal class DocumentReferenceImpl(private val delegate: GoogleDocumentReferen
     return delegate.addSnapshotListener(executor, metadataChanges, listener)
   }
 
-  override fun addSnapshotListener(metadataChanges: MetadataChanges, listener: EventListener<GoogleDocumentSnapshot>): ListenerRegistration {
+  override fun addSnapshotListener(
+      metadataChanges: MetadataChanges,
+      listener: EventListener<GoogleDocumentSnapshot>
+
+  ): ListenerRegistration {
+
     return delegate.addSnapshotListener(metadataChanges, listener)
   }
 
