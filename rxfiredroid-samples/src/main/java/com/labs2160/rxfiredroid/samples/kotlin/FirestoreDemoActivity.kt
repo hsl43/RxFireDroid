@@ -1,3 +1,5 @@
+package com.labs2160.rxfiredroid.samples.kotlin
+
 //package com.labs2160.rxfiredroid.samples
 //
 //import android.os.Bundle

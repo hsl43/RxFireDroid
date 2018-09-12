@@ -1,4 +1,4 @@
-package com.labs2160.rxfiredroid.samples
+package com.labs2160.rxfiredroid.samples.kotlin
 
 import android.os.Bundle
 import android.util.Log
@@ -8,12 +8,13 @@ import com.labs2160.rxfiredroid.auth.FirebaseAuthAppCompatActivity
 import com.labs2160.rxfiredroid.auth.GitHubAuthConfiguration
 import com.labs2160.rxfiredroid.auth.GoogleAuthConfiguration
 import com.labs2160.rxfiredroid.auth.TwitterAuthConfiguration
+import com.labs2160.rxfiredroid.samples.R
 import com.twitter.sdk.android.core.identity.TwitterLoginButton
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.subscribeBy
 import kotlinx.android.synthetic.main.firebase_auth_demo_activity.*
 
-class FirebaseAuthDemoActivity : FirebaseAuthAppCompatActivity() {
+class FirebaseAuthSampleActivity : FirebaseAuthAppCompatActivity() {
   private val disposables = CompositeDisposable()
 
   override fun onCreate(savedInstanceState: Bundle?) {

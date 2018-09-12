@@ -9,7 +9,20 @@
     android:supportsRtl="true"
     android:theme="@style/AppTheme">
 
-    <activity android:name=".FirebaseAuthDemoActivity">
+    <activity android:name=".kotlin.FirebaseAuthSampleActivity">
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
+        <action android:name="android.intent.action.VIEW" />
+
+        <category android:name="android.intent.category.LAUNCHER" />
+        <category android:name="android.intent.category.DEFAULT" />
+        <category android:name="android.intent.category.BROWSABLE" />
+
+        <data android:scheme="labs2160" />
+      </intent-filter>
+    </activity>
+
+    <activity android:name=".java.FirebaseAuthSampleActivity">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
         <action android:name="android.intent.action.VIEW" />
