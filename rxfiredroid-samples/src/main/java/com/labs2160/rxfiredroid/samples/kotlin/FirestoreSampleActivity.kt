@@ -15,27 +15,66 @@ class FirestoreSampleActivity : AppCompatActivity() {
 
     val firestore  = FirebaseFirestore.getInstance()
 
-    val startTime = System.currentTimeMillis()
+    val cities = firestore.rxCollection("cities")
 
-    firestore.rxCollection("users")
+    val tag = javaClass.name
+
+    cities
         .rxAdd(hashMapOf(
-            "first"  to "Bat",
-            "last"   to "Man",
-            "born"   to 1951
+            "name"       to "San Fransisco",
+            "state"      to "CA",
+            "country"    to "USA",
+            "capital"    to false,
+            "population" to 860000,
+            "regions"    to listOf("west_coast", "norcal")
         ))
-        .doOnSuccess { Log.d(javaClass.name, "## Added in ${System.currentTimeMillis() - startTime}ms") }
+        .doOnSuccess { Log.d(tag, "## Added SF") }
+        .flatMap { cities.rxAdd(hashMapOf(
+            "name"       to "Los Angeles",
+            "state"      to "CA",
+            "country"    to "USA",
+            "capital"    to false,
+            "population" to 3900000,
+            "regions"    to listOf("west_coast", "socal")
+        ))}
+        .doOnSuccess { Log.d(tag, "## Added LA") }
+        .flatMap { cities.rxAdd(hashMapOf(
+            "name"       to "Washington D.C.",
+            "state"      to null,
+            "country"    to "USA",
+            "capital"    to true,
+            "population" to 680000,
+            "regions"    to listOf("east_coast")
+        ))}
+        .doOnSuccess { Log.d(tag, "## Added DC") }
+        .flatMap { cities.rxAdd(hashMapOf(
+            "name"       to "Tokyo",
+            "state"      to null,
+            "country"    to "Japan",
+            "capital"    to true,
+            "population" to 9000000,
+            "regions"    to listOf("kanto", "honshu")
+        ))}
+        .doOnSuccess { Log.d(tag, "## Added Tokyo") }
+        .flatMap { cities.rxAdd(hashMapOf(
+            "name"       to "Beijing",
+            "state"      to null,
+            "country"    to "China",
+            "capital"    to true,
+            "population" to 21500000,
+            "regions"    to listOf("jingjinji", "hebei")
+        ))}
+        .doOnSuccess { Log.d(tag, "## Added Beijing") }
         .flatMap {
-          firestore.rxCollection("users")
-              .rxWhereEqualTo("last", "Starr")
+          cities.rxWhereEqualTo("country", "USA")
               .rxGet()
         }
-        .doOnSuccess { Log.d(javaClass.name, "## Fetched in ${System.currentTimeMillis() - startTime}ms") }
         .subscribeBy(
             onSuccess = { querySnapshot ->
-              querySnapshot.forEach { println("## ${it.getId()} => ${it.getData()}") }
+              querySnapshot.forEach { Log.d(tag, "## ${it.getId()} => ${it.getData()}") }
             },
             onError = { error ->
-              Log.e(javaClass.name, "## Error adding document.", error)
+              Log.e(tag, "## Unexpected error!", error)
             }
         )
   }
