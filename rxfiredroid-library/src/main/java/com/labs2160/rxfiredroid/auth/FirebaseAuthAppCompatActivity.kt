@@ -174,17 +174,17 @@ abstract class FirebaseAuthAppCompatActivity : AppCompatActivity() {
 
   fun bindTwitterAuth(force: Boolean = false): Single<AuthResult> = Streams.bindTwitterAuth(firebaseAuth, force)
 
-  open fun gitHubAuthConfiguration(): GitHubAuthConfiguration? = null
+  protected open fun gitHubAuthConfiguration(): GitHubAuthConfiguration? = null
 
-  open fun gitHubSignInButton(): View? = null
+  protected open fun gitHubSignInButton(): View? = null
 
-  open fun googleAuthConfiguration(): GoogleAuthConfiguration? = null
+  protected open fun googleAuthConfiguration(): GoogleAuthConfiguration? = null
 
-  open fun googleSignInButton(): View? = null
+  protected open fun googleSignInButton(): View? = null
 
-  open fun twitterAuthConfiguration(): TwitterAuthConfiguration? = null
+  protected open fun twitterAuthConfiguration(): TwitterAuthConfiguration? = null
 
-  open fun twitterLoginButton(): TwitterLoginButton? = null
+  protected open fun twitterLoginButton(): TwitterLoginButton? = null
 
   private fun initializeTwitterApi(configuration: TwitterAuthConfiguration) {
     Twitter.initialize(TwitterConfig.Builder(this)

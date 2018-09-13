@@ -60,7 +60,7 @@ public class FirebaseAuthSampleActivity extends FirebaseAuthAppCompatActivity {
   }
 
   @Override @Nullable
-  public GitHubAuthConfiguration gitHubAuthConfiguration() {
+  protected GitHubAuthConfiguration gitHubAuthConfiguration() {
     final String clientId     = "...";
     final String clientSecret = "...";
     final String callbackUrl  = "...";
@@ -70,12 +70,12 @@ public class FirebaseAuthSampleActivity extends FirebaseAuthAppCompatActivity {
   }
 
   @Override @Nullable
-  public View gitHubSignInButton() {
+  protected View gitHubSignInButton() {
     return findViewById(R.id.git_hub_sign_in_button);
   }
 
   @Override @Nullable
-  public GoogleAuthConfiguration googleAuthConfiguration() {
+  protected GoogleAuthConfiguration googleAuthConfiguration() {
     final String requestIdToken  = "...";
     final boolean requestId      = false;
     final boolean requestEmail   = false;
@@ -85,12 +85,12 @@ public class FirebaseAuthSampleActivity extends FirebaseAuthAppCompatActivity {
   }
 
   @Override @Nullable
-  public View googleSignInButton() {
+  protected View googleSignInButton() {
     return findViewById(R.id.google_sign_in_button);
   }
 
   @Override @Nullable
-  public TwitterAuthConfiguration twitterAuthConfiguration() {
+  protected TwitterAuthConfiguration twitterAuthConfiguration() {
     final String consumerKey    = "...";
     final String consumerSecret = "...";
     final boolean debug         = true;
@@ -100,7 +100,7 @@ public class FirebaseAuthSampleActivity extends FirebaseAuthAppCompatActivity {
   }
 
   @Override @Nullable
-  public TwitterLoginButton twitterLoginButton() {
+  protected TwitterLoginButton twitterLoginButton() {
     return findViewById(R.id.twitter_sign_in_button);
   }
 
