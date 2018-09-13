@@ -22,17 +22,22 @@ class FirebaseAuthSampleActivity : FirebaseAuthAppCompatActivity() {
 
     setContentView(R.layout.firebase_auth_demo_activity)
 
+    val tag = javaClass.name
+
     email_password_sign_in_button.setOnClickListener {
+      val email    = "..."
+      val password = "..."
+
       disposables.add(
-          firebaseAuth.rxSignInWithEmailAndPassword("...", "...")
+          firebaseAuth.rxSignInWithEmailAndPassword(email, password)
               .subscribeBy(
                   onSuccess = { _ ->
-                    Log.d(javaClass.name, "## Sign-in to Firebase with email and password succeeded")
+                    Log.d(tag, "## Sign-in to Firebase with email and password succeeded")
 
                     disposables.clear()
                   },
                   onError = { error ->
-                    Log.e(javaClass.name, "## Sign-in to Firebase with email and password failed", error)
+                    Log.e(tag, "## Sign-in to Firebase with email and password failed", error)
                   }
               )
       )
@@ -41,32 +46,32 @@ class FirebaseAuthSampleActivity : FirebaseAuthAppCompatActivity() {
     disposables.addAll(
         bindGitHubAuth().subscribeBy(
             onSuccess = { _ ->
-              Log.d(javaClass.name, "## Sign-in to Firebase with GitHub credentials succeeded")
+              Log.d(tag, "## Sign-in to Firebase with GitHub credentials succeeded")
 
               disposables.clear()
             },
             onError = { error ->
-              Log.e(javaClass.name, "## Sign-in to Firebase with GitHub credentials failed", error)
+              Log.e(tag, "## Sign-in to Firebase with GitHub credentials failed", error)
             }
         ),
         bindGoogleAuth().subscribeBy(
             onSuccess = { _ ->
-              Log.d(javaClass.name, "## Sign-in to Firebase with Google credentials succeeded")
+              Log.d(tag, "## Sign-in to Firebase with Google credentials succeeded")
 
               disposables.clear()
             },
             onError = { error ->
-              Log.e(javaClass.name, "## Sign-in to Firebase with Google credentials failed", error)
+              Log.e(tag, "## Sign-in to Firebase with Google credentials failed", error)
             }
         ),
         bindTwitterAuth().subscribeBy(
             onSuccess = { _ ->
-              Log.d(javaClass.name, "## Sign-in to Firebase with Twitter credentials succeeded")
+              Log.d(tag, "## Sign-in to Firebase with Twitter credentials succeeded")
 
               disposables.clear()
             },
             onError = { error ->
-              Log.e(javaClass.name, "## Sign-in to Firebase with Twitter credentials failed", error)
+              Log.e(tag, "## Sign-in to Firebase with Twitter credentials failed", error)
             }
         )
     )

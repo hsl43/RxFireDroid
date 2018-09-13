@@ -23,27 +23,34 @@ public class FirebaseAuthSampleActivity extends FirebaseAuthAppCompatActivity {
 
     setContentView(R.layout.firebase_auth_demo_activity);
 
+    final String tag = getClass().getName();
+
     findViewById(R.id.email_password_sign_in_button).setOnClickListener(view -> {
+      final String email    = "...";
+      final String password = "...";
+
       disposables.add(
-          firebaseAuth.rxSignInWithEmailAndPassword("...", "...").subscribe(
-              authResult -> Log.d(getClass().getName(), "## Sign-in to Firebase with email and password succeeded"),
-                   error -> Log.e(getClass().getName(), "## Sign-in to Firebase with email and password failed", error)
+          firebaseAuth.rxSignInWithEmailAndPassword(email, password).subscribe(
+              authResult -> Log.d(tag, "## Sign-in to Firebase with email and password succeeded"),
+                   error -> Log.e(tag, "## Sign-in to Firebase with email and password failed", error)
           )
       );
     });
 
+    final boolean forceRefresh = savedInstanceState == null;
+
     disposables.addAll(
-        bindGitHubAuth(false).subscribe(
-            authResult -> Log.d(getClass().getName(), "## Sign-in to Firebase with GitHub credentials succeeded"),
-                 error -> Log.e(getClass().getName(), "## Sign-in to Firebase with GitHub credentials failed", error)
+        bindGitHubAuth(forceRefresh).subscribe(
+            authResult -> Log.d(tag, "## Sign-in to Firebase with GitHub credentials succeeded"),
+                 error -> Log.e(tag, "## Sign-in to Firebase with GitHub credentials failed", error)
         ),
-        bindGoogleAuth(false).subscribe(
-            authResult -> Log.d(getClass().getName(), "## Sign-in to Firebase with Google credentials succeeded"),
-                 error -> Log.e(getClass().getName(), "## Sign-in to Firebase with Google credentials failed", error)
+        bindGoogleAuth(forceRefresh).subscribe(
+            authResult -> Log.d(tag, "## Sign-in to Firebase with Google credentials succeeded"),
+                 error -> Log.e(tag, "## Sign-in to Firebase with Google credentials failed", error)
         ),
-        bindTwitterAuth(false).subscribe(
-            authResult -> Log.d(getClass().getName(), "## Sign-in to Firebase with Twitter credentials succeeded"),
-                 error -> Log.e(getClass().getName(), "## Sign-in to Firebase with Twitter credentials failed", error)
+        bindTwitterAuth(forceRefresh).subscribe(
+            authResult -> Log.d(tag, "## Sign-in to Firebase with Twitter credentials succeeded"),
+                 error -> Log.e(tag, "## Sign-in to Firebase with Twitter credentials failed", error)
         )
     );
 

@@ -7,7 +7,7 @@ import com.google.firebase.FirebaseApp
 import com.labs2160.rxfiredroid.firestore.FirebaseFirestore
 import io.reactivex.rxkotlin.subscribeBy
 
-class FirestoreSampleActivity : AppCompatActivity() {
+class FirebaseFirestoreSampleActivity : AppCompatActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
 
