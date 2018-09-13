@@ -24,8 +24,11 @@ public class FirebaseAuthSampleActivity extends FirebaseAuthAppCompatActivity {
     setContentView(R.layout.firebase_auth_demo_activity);
 
     findViewById(R.id.email_password_sign_in_button).setOnClickListener(view -> {
+      final String email    = "...";
+      final String password = "...";
+
       disposables.add(
-          firebaseAuth.rxSignInWithEmailAndPassword("...", "...").subscribe(
+          firebaseAuth.rxSignInWithEmailAndPassword(email, password).subscribe(
               authResult -> Log.d(getClass().getName(), "## Sign-in to Firebase with email and password succeeded"),
                    error -> Log.e(getClass().getName(), "## Sign-in to Firebase with email and password failed", error)
           )

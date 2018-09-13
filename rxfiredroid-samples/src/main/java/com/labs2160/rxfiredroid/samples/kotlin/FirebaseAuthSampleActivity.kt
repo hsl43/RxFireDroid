@@ -23,8 +23,11 @@ class FirebaseAuthSampleActivity : FirebaseAuthAppCompatActivity() {
     setContentView(R.layout.firebase_auth_demo_activity)
 
     email_password_sign_in_button.setOnClickListener {
+      val email    = "..."
+      val password = "..."
+
       disposables.add(
-          firebaseAuth.rxSignInWithEmailAndPassword("...", "...")
+          firebaseAuth.rxSignInWithEmailAndPassword(email, password)
               .subscribeBy(
                   onSuccess = { _ ->
                     Log.d(javaClass.name, "## Sign-in to Firebase with email and password succeeded")
