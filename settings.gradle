@@ -1,1 +1,1 @@
-include ':rxfiredroid-samples', ':rxfiredroid-library'
+include ':rxfiredroid-samples', ':rxfiredroid'

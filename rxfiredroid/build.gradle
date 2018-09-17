@@ -1,5 +1,22 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.4'
+    }
+}
+
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'com.jfrog.bintray'
+
+group = 'com.labs2160'
+
+version = '0.1.0'
 
 android {
     compileSdkVersion 27
@@ -9,7 +26,7 @@ android {
         minSdkVersion 16
         targetSdkVersion 27
         versionCode 1
-        versionName '1.0'
+        versionName version
         testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
     }
 
@@ -23,6 +40,56 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+
+artifacts {
+    archives sourcesJar
+}
+
+def bintrayUser
+def bintrayApiKey
+
+File propertiesFile = project.rootProject.file('local.properties')
+
+if(propertiesFile.exists()) {
+    Properties properties = new Properties()
+    properties.load(propertiesFile.newDataInputStream())
+
+    bintrayUser = properties.getProperty('bintray.user')
+    bintrayApiKey = properties.getProperty('bintray.key')
+
+} else {
+    bintrayUser = System.getenv('BINTRAY_USER')
+    bintrayApiKey = System.getenv('BINTRAY_KEY')
+}
+
+bintray {
+    user = bintrayUser
+    key = bintrayApiKey
+
+    configurations = ['archives']
+
+    pkg {
+        userOrg = 'labs2160'
+        repo = "RxFireDroid"
+        name = 'com.labs2160.rxfiredroid'
+        licenses = ["Apache-2.0"]
+        websiteUrl = 'https://github.com/hsl43/RxFireDroid'
+        issueTrackerUrl = 'https://github.com/hsl43/RxFireDroid/issues'
+        vcsUrl = 'https://github.com/hsl43/RxFireDroid.git'
+        publish = true
+        override = true
+
+        version {
+            name = '0.1.0'
+            released = new Date()
+        }
     }
 }
 
