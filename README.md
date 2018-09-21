@@ -68,25 +68,25 @@ dependencies {
 
 ## Authentication
 ### FirebaseAuth
-An Rx-ified version of the standard `FirebaseAuth` class. This version 
-maintains the same interface as the standard version, and thus can be used
-as a drop-in replacement. 
+A reactive version of the standard `FirebaseAuth` class. This version maintains
+the same interface as the standard version and thus can be used as a drop-in 
+replacement. 
 
-Long-running operations that return a `Task` now have overloaded Rx-ified 
-alternatives prefixed with "rx-". For example:
+Long-running operations that return a `Task` now have reactive alternatives 
+prefixed with "rx-". For example, the reactive alternative for:
 ```
 public Task<AuthResult> signInWithCredential(AuthCredential credential)
 ```
-...and:
+...is defined as:
 ```
 public Single<AuthResult> rxSignInWithCredential(AuthCredential credential)
 ```
 
-The Rx-ified versions of:
+The reactive versions of:
 * `add/removeAuthStateListener()`, and
 * `add/removeIdTokenListener()`
 
-...can be found in the form of:
+...are defined as:
 * `rxBindAuthState()`, and
 * `rxBindIdTokenState()`
 
@@ -99,7 +99,7 @@ subscription.
 This class is an extension of `android.support.v7.app.AppCompatActivity` and 
 is equipped to handle auth via the identity providers detailed further below.
 
-Classes extending this class inherit an instance `FirebaseAuth` available for 
+Classes extending this class inherit an instance `FirebaseAuth` ready for 
 use after `onCreate()`. This instance can be used to directly invoke sign-in 
 methods that do not require specialized callback handling, such as 
 `rxSignInAnonymously()` and `rxSignInWithEmailAndPassword()`. 
@@ -163,13 +163,13 @@ instead.
 
 
 ## Remote Configuration
-asdf
+*TODO*
 
 ## Realtime Database
-asdf
+*TODO*
 
 ## Cloud Firestore
-asdf
+*TODO*
 
 ## Cloud Messaging
-asdf
+*TODO*
