@@ -34,7 +34,9 @@ dependencies {
     implementation "com.android.support:design:$support_lib_version"
     implementation 'com.android.support.constraint:constraint-layout:1.1.2'
     implementation "com.google.firebase:firebase-core:$firebase_core_version"
-    implementation project(':rxfiredroid')
+    implementation project(':rxfiredroid-core')
+    implementation project(':rxfiredroid-auth')
+    implementation project(':rxfiredroid-firestore')
     implementation 'com.android.support:multidex:1.0.3'
     testImplementation "junit:junit:$junit_version"
     androidTestImplementation 'com.android.support.test:runner:1.0.2'

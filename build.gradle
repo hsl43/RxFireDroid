@@ -2,6 +2,8 @@ buildscript {
     ext {
         kotlin_version             = '1.2.51'
         support_lib_version        = '27.1.1'
+        rxjava2_version            = '2.2.1'
+        rxkotlin2_version          = '2.3.0'
         firebase_core_version      = '16.0.3'
         firebase_auth_version      = '16.0.3'
         firebase_config_version    = '16.0.0'

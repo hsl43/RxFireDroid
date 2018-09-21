@@ -1,1 +1,7 @@
-include ':rxfiredroid-samples', ':rxfiredroid'
+include ':rxfiredroid-samples',
+        ':rxfiredroid-core',
+        ':rxfiredroid-auth',
+        ':rxfiredroid-config',
+        ':rxfiredroid-database',
+        ':rxfiredroid-firestore',
+        ':rxfiredroid-messaging'
