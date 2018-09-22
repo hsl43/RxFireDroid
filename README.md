@@ -23,19 +23,19 @@ allprojects {
 App-level `build.gradle`
 ```groovy
 dependencies {
-    // RxFireDroid Authentication
+    // Authentication
     implementation 'com.labs2160:rxfiredroid-auth:0.1.0'
     
-    // RxFireDroid Remote Configuration  
+    // Remote Configuration  
     implementation 'com.labs2160:rxfiredroid-config:0.1.0'
     
-    // RxFireDroid Realtime Database  
+    // Realtime Database  
     implementation 'com.labs2160:rxfiredroid-database:0.1.0'
     
-    // RxFireDroid Cloud Firestore  
+    // Cloud Firestore  
     implementation 'com.labs2160:rxfiredroid-firestore:0.1.0'
     
-    // RxFireDroid Cloud Messaging  
+    // Cloud Messaging  
     implementation 'com.labs2160:rxfiredroid-messaging:0.1.0'
 }
 ```
