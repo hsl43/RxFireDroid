@@ -1,0 +1,42 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply from: "$rootDir/conversions.gradle"
+apply from: "$rootDir/bintray.gradle"
+
+android {
+    compileSdkVersion toInt("$compile_sdk_version")
+    buildToolsVersion "$build_tools_version"
+
+    defaultConfig {
+        minSdkVersion toInt("$min_sdk_version")
+        targetSdkVersion toInt("$target_sdk_version")
+        versionCode toInt("$version_code")
+        versionName "$version_name"
+        testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+configureBintrayUploadTask('com.labs2160.rxfiredroid.config')
+
+dependencies {
+    api("com.google.firebase:firebase-config:$firebase_config_version") {
+        exclude group: 'com.google.android.gms', module: 'play-services-measurement-base'
+        exclude group: 'com.google.firebase', module: 'firebase-analytics-impl'
+    }
+    implementation project(':rxfiredroid-core')
+//    testImplementation 'junit:junit:4.12'
+//    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+//    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+}

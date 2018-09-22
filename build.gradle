@@ -1,7 +1,17 @@
 buildscript {
     ext {
-        kotlin_version             = '1.2.51'
+        group_name   = 'com.labs2160'
+        version_name = '0.1.0'
+        version_code = 1
+
+        compile_sdk_version        = 27
+        target_sdk_version         = 27
+        min_sdk_version            = 16
+        build_tools_version        = '27.0.3'
+        kotlin_version             = '1.2.70'
         support_lib_version        = '27.1.1'
+        rxjava2_version            = '2.2.1'
+        rxkotlin2_version          = '2.3.0'
         firebase_core_version      = '16.0.3'
         firebase_auth_version      = '16.0.3'
         firebase_config_version    = '16.0.0'
@@ -24,6 +34,8 @@ buildscript {
         classpath 'com.android.tools.build:gradle:3.1.4'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath 'com.google.gms:google-services:4.0.1'
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.4'
     }
 }
 
@@ -31,9 +43,30 @@ allprojects {
     repositories {
         google()
         jcenter()
+        maven { url 'https://dl.bintray.com/labs2160/RxFireDroid' }
     }
 }
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+task assembleAll(type: GradleBuild) {
+    tasks = [
+            ':rxfiredroid-auth:assembleDebug',
+            ':rxfiredroid-config:assembleDebug',
+            ':rxfiredroid-database:assembleDebug',
+            ':rxfiredroid-firestore:assembleDebug',
+            ':rxfiredroid-messaging:assembleDebug'
+    ]
+}
+
+task bintrayUploadAll(type: GradleBuild, dependsOn: 'assembleAll') {
+    tasks = [
+            ':rxfiredroid-auth:bintrayUpload',
+            ':rxfiredroid-config:bintrayUpload',
+            ':rxfiredroid-database:bintrayUpload',
+            ':rxfiredroid-firestore:bintrayUpload',
+            ':rxfiredroid-messaging:bintrayUpload'
+    ]
 }

@@ -1,0 +1,58 @@
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'com.jfrog.bintray'
+
+group = "$group_name"
+
+version = "$version_name"
+
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+
+artifacts {
+    archives sourcesJar
+}
+
+def bintrayUser
+def bintrayApiKey
+
+File propertiesFile = project.rootProject.file('local.properties')
+
+if(propertiesFile.exists()) {
+    Properties properties = new Properties()
+    properties.load(propertiesFile.newDataInputStream())
+
+    bintrayUser = properties.getProperty('bintray.user')
+    bintrayApiKey = properties.getProperty('bintray.key')
+
+} else {
+    bintrayUser = System.getenv('BINTRAY_USER')
+    bintrayApiKey = System.getenv('BINTRAY_KEY')
+}
+
+ext.configureBintrayUploadTask = { packageName ->
+    bintray {
+        user = bintrayUser
+        key = bintrayApiKey
+
+        configurations = ['archives']
+
+        pkg {
+            userOrg = 'labs2160'
+            repo = "RxFireDroid"
+            name = "$packageName"
+            licenses = ["Apache-2.0"]
+            websiteUrl = 'https://github.com/hsl43/RxFireDroid'
+            issueTrackerUrl = 'https://github.com/hsl43/RxFireDroid/issues'
+            vcsUrl = 'https://github.com/hsl43/RxFireDroid.git'
+            publish = true
+            override = true
+
+            version {
+                name = "${version_name}"
+                released = new Date()
+            }
+        }
+    }
+}
