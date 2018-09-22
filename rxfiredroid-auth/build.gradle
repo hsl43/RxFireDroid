@@ -1,33 +1,18 @@
-buildscript {
-    repositories {
-        jcenter()
-    }
-
-    dependencies {
-        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
-        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.4'
-    }
-}
-
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-apply plugin: 'com.github.dcendents.android-maven'
-apply plugin: 'com.jfrog.bintray'
-
-group = 'com.labs2160'
-
-version = '0.1.0'
+apply from: "$rootDir/conversions.gradle"
+apply from: "$rootDir/bintray.gradle"
 
 android {
-    compileSdkVersion 27
-    buildToolsVersion '27.0.3'
+    compileSdkVersion toInt("$compile_sdk_version")
+    buildToolsVersion "$build_tools_version"
 
     defaultConfig {
-        minSdkVersion 16
-        targetSdkVersion 27
-        versionCode 1
-        versionName version
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        minSdkVersion toInt("$min_sdk_version")
+        targetSdkVersion toInt("$target_sdk_version")
+        versionCode toInt("$version_code")
+        versionName "$version_name"
+        testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
     }
 
     buildTypes {
@@ -43,12 +28,9 @@ android {
     }
 }
 
+configureBintrayUploadTask('com.labs2160.rxfiredroid.auth')
+
 dependencies {
-    api "io.reactivex.rxjava2:rxjava:$rxjava2_version"
-    api "io.reactivex.rxjava2:rxkotlin:$rxkotlin2_version"
-    api("com.android.support:appcompat-v7:$support_lib_version") {
-        exclude group: 'com.android.support', module: 'support-media-compat'
-    }
     api "com.google.firebase:firebase-auth:$firebase_auth_version"
     api 'com.twitter.sdk.android:twitter-core:3.1.1'
     implementation project(':rxfiredroid-core')

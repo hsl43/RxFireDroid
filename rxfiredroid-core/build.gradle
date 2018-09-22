@@ -1,32 +1,16 @@
-buildscript {
-    repositories {
-        jcenter()
-    }
-
-    dependencies {
-        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
-        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.4'
-    }
-}
-
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-apply plugin: 'com.github.dcendents.android-maven'
-apply plugin: 'com.jfrog.bintray'
-
-group = 'com.labs2160'
-
-version = '0.1.0'
+apply from: "$rootDir/conversions.gradle"
 
 android {
-    compileSdkVersion 27
-    buildToolsVersion '27.0.3'
+    compileSdkVersion toInt("$compile_sdk_version")
+    buildToolsVersion "$build_tools_version"
 
     defaultConfig {
-        minSdkVersion 16
-        targetSdkVersion 27
-        versionCode 1
-        versionName version
+        minSdkVersion toInt("$min_sdk_version")
+        targetSdkVersion toInt("$target_sdk_version")
+        versionCode toInt("$version_code")
+        versionName "$version_name"
         testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
     }
 
@@ -43,56 +27,6 @@ android {
     }
 }
 
-task sourcesJar(type: Jar) {
-    from android.sourceSets.main.java.srcDirs
-    classifier = 'sources'
-}
-
-artifacts {
-    archives sourcesJar
-}
-
-def bintrayUser
-def bintrayApiKey
-
-File propertiesFile = project.rootProject.file('local.properties')
-
-if(propertiesFile.exists()) {
-    Properties properties = new Properties()
-    properties.load(propertiesFile.newDataInputStream())
-
-    bintrayUser = properties.getProperty('bintray.user')
-    bintrayApiKey = properties.getProperty('bintray.key')
-
-} else {
-    bintrayUser = System.getenv('BINTRAY_USER')
-    bintrayApiKey = System.getenv('BINTRAY_KEY')
-}
-
-bintray {
-    user = bintrayUser
-    key = bintrayApiKey
-
-    configurations = ['archives']
-
-    pkg {
-        userOrg = 'labs2160'
-        repo = "RxFireDroid"
-        name = 'com.labs2160.rxfiredroid'
-        licenses = ["Apache-2.0"]
-        websiteUrl = 'https://github.com/hsl43/RxFireDroid'
-        issueTrackerUrl = 'https://github.com/hsl43/RxFireDroid/issues'
-        vcsUrl = 'https://github.com/hsl43/RxFireDroid.git'
-        publish = true
-        override = true
-
-        version {
-            name = '0.1.0'
-            released = new Date()
-        }
-    }
-}
-
 dependencies {
     api "io.reactivex.rxjava2:rxjava:$rxjava2_version"
     api "io.reactivex.rxjava2:rxkotlin:$rxkotlin2_version"
@@ -100,11 +34,11 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-media-compat'
     }
     api "com.google.android.gms:play-services-auth:$player_services_version"
-    testImplementation "junit:junit:$junit_version"
-    testImplementation "org.assertj:assertj-core:$assertj_version"
-    testImplementation "org.mockito:mockito-all:$mockito_version"
-    androidTestImplementation('com.android.support.test:runner:1.0.2') {
-        exclude group: 'com.android.support', module: 'support-media-compat'
-    }
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+//    testImplementation "junit:junit:$junit_version"
+//    testImplementation "org.assertj:assertj-core:$assertj_version"
+//    testImplementation "org.mockito:mockito-all:$mockito_version"
+//    androidTestImplementation('com.android.support.test:runner:1.0.2') {
+//        exclude group: 'com.android.support', module: 'support-media-compat'
+//    }
+//    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 }
