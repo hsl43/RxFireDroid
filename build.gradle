@@ -50,3 +50,23 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+task assembleAll(type: GradleBuild) {
+    tasks = [
+            ':rxfiredroid-auth:assembleDebug',
+            ':rxfiredroid-config:assembleDebug',
+            ':rxfiredroid-database:assembleDebug',
+            ':rxfiredroid-firestore:assembleDebug',
+            ':rxfiredroid-messaging:assembleDebug'
+    ]
+}
+
+task bintrayUploadAll(type: GradleBuild, dependsOn: 'assembleAll') {
+    tasks = [
+            ':rxfiredroid-auth:bintrayUpload',
+            ':rxfiredroid-config:bintrayUpload',
+            ':rxfiredroid-database:bintrayUpload',
+            ':rxfiredroid-firestore:bintrayUpload',
+            ':rxfiredroid-messaging:bintrayUpload'
+    ]
+}
