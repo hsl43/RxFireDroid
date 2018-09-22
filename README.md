@@ -1,5 +1,7 @@
 # RxFireDroid 
 
+<img src='https://travis-ci.org/hsl43/RxFireDroid.svg?branch=master' />
+
 Drop-in replacements for Google Firebase libraries with added RxJava support.
 
 ## Releases
