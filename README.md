@@ -74,12 +74,12 @@ A reactive version of the standard `FirebaseAuth` class. This version maintains
 the same interface as the standard version and thus can be used as a drop-in 
 replacement. 
 
-Long-running operations that return a `Task` now have reactive alternatives 
-prefixed with "rx-". For example, the reactive alternative for:
+Methods that return `Task`s now have reactive alternatives of the same name
+prefixed with "rx". For example, the reactive alternative for:
 ```
 public Task<AuthResult> signInWithCredential(AuthCredential credential)
 ```
-...is defined as:
+...is:
 ```
 public Single<AuthResult> rxSignInWithCredential(AuthCredential credential)
 ```
