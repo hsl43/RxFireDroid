@@ -52,7 +52,7 @@ dependencies {
 * `com.google.firebase:firebase-config:16.0.0`
 * `com.google.firebase:firebase-database:16.0.2`
 * `com.google.firebase:firebase-firestore:17.1.0`
-* `com.google.firebase:firebase-messaging:17.3.1`
+* `com.google.firebase:firebase-messaging:17.3.2`
 
 ## Featured Libraries
 - [Authentication](#authentication)

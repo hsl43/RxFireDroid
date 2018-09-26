@@ -1,15 +1,14 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-apply from: "$rootDir/conversions.gradle"
 
 android {
-    compileSdkVersion toInt("$compile_sdk_version")
+    compileSdkVersion "$compile_sdk_version" as Integer
     buildToolsVersion "$build_tools_version"
 
     defaultConfig {
-        minSdkVersion toInt("$min_sdk_version")
-        targetSdkVersion toInt("$target_sdk_version")
-        versionCode toInt("$version_code")
+        minSdkVersion "$min_sdk_version" as Integer
+        targetSdkVersion "$target_sdk_version" as Integer
+        versionCode "$version_code" as Integer
         versionName "$version_name"
         testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
     }

@@ -1,3 +1,0 @@
-ext.toInt = { value ->
-    return Integer.valueOf(value)
-}
