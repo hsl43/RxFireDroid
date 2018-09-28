@@ -1,3 +1,8 @@
 <resources>
-  <string name="app_name">RxFireDroid</string>
+  <string name="app_name">RxFireDroid Samples</string>
+  <string name="main_menu_auth_demos">Authentication Samples</string>
+  <string name="main_menu_config_demo">Remote Config Sample</string>
+  <string name="main_menu_database_demo">Realtime Database Sample</string>
+  <string name="main_menu_firestore_demo">Cloud Firestore Sample</string>
+  <string name="main_menu_messaging_demo">Cloud Messaging Sample</string>
 </resources>

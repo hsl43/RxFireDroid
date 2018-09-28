@@ -32,7 +32,7 @@ android {
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation "com.android.support:design:$support_lib_version"
-    implementation 'com.android.support.constraint:constraint-layout:1.1.2'
+    implementation "com.android.support:recyclerview-v7:$support_lib_version"
     implementation "com.google.firebase:firebase-core:$firebase_core_version"
     implementation project(':rxfiredroid-core')
     implementation project(':rxfiredroid-auth')
