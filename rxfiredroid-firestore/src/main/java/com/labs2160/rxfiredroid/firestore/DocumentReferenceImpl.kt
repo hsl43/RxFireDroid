@@ -214,7 +214,14 @@ internal class DocumentReferenceImpl(private val delegate: GoogleDocumentReferen
       delegate.get()
           .addOnCompleteListener { task ->
             if(task.isSuccessful) {
-              emitter.onSuccess(DocumentSnapshot.newInstance(task.result))
+              val result = task.result
+
+              if(result != null) {
+                emitter.onSuccess(DocumentSnapshot.newInstance(result))
+              } else {
+                emitter.onError(RuntimeException("Task completed but did not produce a result"))
+              }
+
             } else {
               emitter.onError(task.exception ?: RuntimeException("Unexpected error in rxGet()"))
             }
@@ -227,7 +234,14 @@ internal class DocumentReferenceImpl(private val delegate: GoogleDocumentReferen
       delegate.get(source)
           .addOnCompleteListener { task ->
             if(task.isSuccessful) {
-              emitter.onSuccess(DocumentSnapshot.newInstance(task.result))
+              val result = task.result
+
+              if(result != null) {
+                emitter.onSuccess(DocumentSnapshot.newInstance(result))
+              } else {
+                emitter.onError(RuntimeException("Task completed but did not produce a result"))
+              }
+
             } else {
               emitter.onError(task.exception ?: RuntimeException("Unexpected error in rxGet()"))
             }

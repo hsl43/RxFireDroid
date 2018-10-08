@@ -3,15 +3,15 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdkVersion 27
-    buildToolsVersion '27.0.3'
+    compileSdkVersion "$compile_sdk_version" as Integer
+    buildToolsVersion "$build_tools_version"
 
     defaultConfig {
         applicationId 'com.labs2160.rxfiredroid.samples'
-        minSdkVersion 16
-        targetSdkVersion 27
-        versionCode 1
-        versionName '1.0'
+        minSdkVersion "$min_sdk_version" as Integer
+        targetSdkVersion "$target_sdk_version" as Integer
+        versionCode "$version_code" as Integer
+        versionName "$version_name"
         multiDexEnabled true
         testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
     }
@@ -34,9 +34,14 @@ dependencies {
     implementation "com.android.support:design:$support_lib_version"
     implementation "com.android.support:recyclerview-v7:$support_lib_version"
     implementation "com.google.firebase:firebase-core:$firebase_core_version"
+    implementation 'com.google.firebase:firebase-iid:17.0.2'
     implementation project(':rxfiredroid-core')
     implementation project(':rxfiredroid-auth')
     implementation project(':rxfiredroid-firestore')
+    implementation project(':rxfiredroid-messaging')
+//    implementation(project(':rxfiredroid-messaging')) {
+//        exclude group: 'com.google.firebase', module: 'firebase-iid'
+//    }
     implementation 'com.android.support:multidex:1.0.3'
     testImplementation "junit:junit:$junit_version"
     androidTestImplementation 'com.android.support.test:runner:1.0.2'

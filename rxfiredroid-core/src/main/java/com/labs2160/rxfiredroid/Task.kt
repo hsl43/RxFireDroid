@@ -120,12 +120,12 @@ interface Task<TResult> {
   /**
    * Gets the result of the Task, if it has already completed.
    */
-  fun getResult(): TResult
+  fun getResult(): TResult?
 
   /**
    * Gets the result of the Task, if it has already completed.
    */
-  fun <X : Throwable> getResult(exceptionType: Class<X>): TResult
+  fun <X : Throwable> getResult(exceptionType: Class<X>): TResult?
 
   /**
    * Returns true if the Task is canceled; false otherwise.

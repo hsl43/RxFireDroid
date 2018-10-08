@@ -19,7 +19,14 @@ fun <TResult> Task<TResult>.addRxOnCompleteListener(emitter: CompletableEmitter,
 fun <TResult> Task<TResult>.addRxOnCompleteListener(emitter: SingleEmitter<TResult>, errorMessage: String? = null): Task<TResult> {
   this.addOnCompleteListener { task ->
     if(task.isSuccessful) {
-      emitter.onSuccess(task.result)
+      val result = task.result
+
+      if(result != null) {
+        emitter.onSuccess(result)
+      } else {
+        emitter.onError(RuntimeException("Task completed but did not produce a result"))
+      }
+
     } else {
       emitter.onError(task.exception ?: RuntimeException(errorMessage))
     }

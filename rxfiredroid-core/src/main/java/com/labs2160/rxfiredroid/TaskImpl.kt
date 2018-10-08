@@ -93,11 +93,11 @@ internal open class TaskImpl<TResult>(private val delegate: GoogleTask<TResult>)
     return delegate.exception
   }
 
-  override fun getResult(): TResult {
+  override fun getResult(): TResult? {
     return delegate.result
   }
 
-  override fun <X : Throwable> getResult(exceptionType: Class<X>): TResult {
+  override fun <X : Throwable> getResult(exceptionType: Class<X>): TResult? {
     return delegate.getResult(exceptionType)
   }
 

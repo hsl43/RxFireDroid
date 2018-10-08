@@ -149,9 +149,13 @@ abstract class FirebaseAuthAppCompatActivity : AppCompatActivity() {
         if(googleSignInTask.isSuccessful) {
           val account = googleSignInTask.result
 
-          val credential = GoogleAuthProvider.getCredential(account.idToken, null)
+          if(account == null) {
+            Streams.accept(GoogleAuthResult(error = RuntimeException("Google sign-in task completed but no account was resolved")))
+          } else {
+            val credential = GoogleAuthProvider.getCredential(account.idToken, null)
 
-          Streams.accept(GoogleAuthResult(credential))
+            Streams.accept(GoogleAuthResult(credential))
+          }
 
         } else {
           Streams.accept(GoogleAuthResult(error = googleSignInTask.exception))

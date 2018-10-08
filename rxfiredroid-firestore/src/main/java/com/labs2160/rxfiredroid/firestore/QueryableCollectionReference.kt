@@ -197,7 +197,14 @@ internal class QueryableCollectionReference(
       delegate.add(data)
           .addOnCompleteListener { task ->
             if(task.isSuccessful) {
-              emitter.onSuccess(DocumentReference.newInstance(task.result))
+              val result = task.result
+
+              if(result != null) {
+                emitter.onSuccess(DocumentReference.newInstance(result))
+              } else {
+                emitter.onError(RuntimeException("Task completed but did not produce a result"))
+              }
+
             } else {
               emitter.onError(task.exception ?: RuntimeException("Unexpected error in rxAdd()"))
             }
@@ -212,7 +219,14 @@ internal class QueryableCollectionReference(
       delegate.add(pojo)
           .addOnCompleteListener { task ->
             if(task.isSuccessful) {
-              emitter.onSuccess(DocumentReference.newInstance(task.result))
+              val result = task.result
+
+              if(result != null) {
+                emitter.onSuccess(DocumentReference.newInstance(result))
+              } else {
+                emitter.onError(RuntimeException("Task completed but did not produce a result"))
+              }
+
             } else {
               emitter.onError(task.exception ?: RuntimeException("Unexpected error in rxAdd()"))
             }
@@ -390,7 +404,14 @@ internal class QueryableCollectionReference(
       delegate.get()
           .addOnCompleteListener { task ->
             if(task.isSuccessful) {
-              emitter.onSuccess(QuerySnapshot.newInstance(task.result))
+              val result = task.result
+
+              if(result != null) {
+                emitter.onSuccess(QuerySnapshot.newInstance(result))
+              } else {
+                emitter.onError(RuntimeException("Task completed but did not produce a result"))
+              }
+
             } else {
               emitter.onError(task.exception ?: RuntimeException("Unexpected error in rxGet()"))
             }
@@ -406,7 +427,14 @@ internal class QueryableCollectionReference(
       delegate.get(source)
           .addOnCompleteListener { task ->
             if(task.isSuccessful) {
-              emitter.onSuccess(QuerySnapshot.newInstance(task.result))
+              val result = task.result
+
+              if(result != null) {
+                emitter.onSuccess(QuerySnapshot.newInstance(result))
+              } else {
+                emitter.onError(RuntimeException("Task completed but did not produce a result"))
+              }
+
             } else {
               emitter.onError(task.exception ?: RuntimeException("Unexpected error in rxGet()"))
             }

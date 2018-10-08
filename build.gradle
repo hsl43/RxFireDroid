@@ -4,22 +4,22 @@ buildscript {
         version_name = '0.1.0'
         version_code = 1
 
-        kotlin_version             = '1.2.70'
+        kotlin_version             = '1.2.71'
         compile_sdk_version        = 27
         target_sdk_version         = 27
         min_sdk_version            = 16
-        build_tools_version        = '27.0.3'
+        build_tools_version        = '28.0.2'
         support_lib_version        = '27.1.1'
         rxjava2_version            = '2.2.1'
         rxkotlin2_version          = '2.3.0'
-        firebase_core_version      = '16.0.3'
-        firebase_auth_version      = '16.0.3'
+        firebase_core_version      = '16.0.4'
+        firebase_auth_version      = '16.0.4'
         firebase_config_version    = '16.0.0'
-        firebase_database_version  = '16.0.2'
-        firebase_firestore_version = '17.1.0'
-        firebase_messaging_version = '17.3.2'
+        firebase_database_version  = '16.0.3'
+        firebase_firestore_version = '17.1.1'
+        firebase_messaging_version = '17.3.3'
         firebase_storage_version   = '16.0.2'
-        player_services_version    = '16.0.0'
+        player_services_version    = '16.0.1'
         junit_version              = '4.12'
         assertj_version            = '3.9.1'
         mockito_version            = '1.10.19'
@@ -31,7 +31,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.1.4'
+        classpath 'com.android.tools.build:gradle:3.2.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath 'com.google.gms:google-services:4.0.1'
         classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
@@ -43,7 +43,13 @@ allprojects {
     repositories {
         google()
         jcenter()
-        maven { url 'https://dl.bintray.com/labs2160/RxFireDroid' }
+
+        configurations.all {
+            resolutionStrategy {
+//                force 'com.google.firebase:firebase-iid:17.0.2'
+                force 'com.google.android.gms:play-services-basement:15.0.1'
+            }
+        }
     }
 }
 
