@@ -11,7 +11,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
 import com.labs2160.rxfiredroid.samples.kotlin.FirebaseAuthSampleActivity
-import com.labs2160.rxfiredroid.samples.kotlin.FirebaseFirestoreSampleActivity
+import com.labs2160.rxfiredroid.samples.kotlin.FirebaseCloudMessagingSampleActivity
 import kotlinx.android.synthetic.main.main_activity.*
 
 class MainActivity : AppCompatActivity() {
@@ -56,8 +56,9 @@ class MainActivity : AppCompatActivity() {
     main_fab.setOnClickListener { Log.d(javaClass.name, "## TODO") }
 
     recyclerViewAdapter = MainMenuRecyclerViewAdapter(listOf(
-        R.string.main_menu_auth_demos to FirebaseAuthSampleActivity::class.java,
-        R.string.main_menu_firestore_demo to FirebaseFirestoreSampleActivity::class.java
+        R.string.main_menu_auth_samples to FirebaseAuthSampleActivity::class.java,
+//        R.string.main_menu_firestore_sample to FirebaseFirestoreSampleActivity::class.java,
+        R.string.main_menu_messaging_sample to FirebaseCloudMessagingSampleActivity::class.java
     ))
 
     recyclerViewLayoutManager = LinearLayoutManager(this)

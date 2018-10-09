@@ -30,10 +30,7 @@ android {
 configureBintrayUploadTask('com.labs2160.rxfiredroid.config')
 
 dependencies {
-    api("com.google.firebase:firebase-config:$firebase_config_version") {
-        exclude group: 'com.google.android.gms', module: 'play-services-measurement-base'
-        exclude group: 'com.google.firebase', module: 'firebase-analytics-impl'
-    }
+    api "com.google.firebase:firebase-config:$firebase_config_version"
     implementation project(':rxfiredroid-core')
 //    testImplementation 'junit:junit:4.12'
 //    androidTestImplementation 'com.android.support.test:runner:1.0.2'

@@ -29,6 +29,9 @@ android {
 dependencies {
     api "io.reactivex.rxjava2:rxjava:$rxjava2_version"
     api "io.reactivex.rxjava2:rxkotlin:$rxkotlin2_version"
+    api("com.google.firebase:firebase-core:$firebase_core_version") {
+        exclude group: 'com.firebaseui', module: 'firebase-ui-database'
+    }
     api("com.android.support:appcompat-v7:$support_lib_version") {
         exclude group: 'com.android.support', module: 'support-media-compat'
     }

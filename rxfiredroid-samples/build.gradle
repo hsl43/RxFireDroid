@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'com.google.android.gms.strict-version-matcher-plugin'
 
 android {
     compileSdkVersion "$compile_sdk_version" as Integer
@@ -33,19 +34,16 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation "com.android.support:design:$support_lib_version"
     implementation "com.android.support:recyclerview-v7:$support_lib_version"
-    implementation "com.google.firebase:firebase-core:$firebase_core_version"
-    implementation 'com.google.firebase:firebase-iid:17.0.2'
+    implementation 'com.android.support:multidex:1.0.3'
     implementation project(':rxfiredroid-core')
     implementation project(':rxfiredroid-auth')
-    implementation project(':rxfiredroid-firestore')
+    implementation project(':rxfiredroid-config')
+    implementation project(':rxfiredroid-database')
+//    implementation project(':rxfiredroid-firestore')
     implementation project(':rxfiredroid-messaging')
-//    implementation(project(':rxfiredroid-messaging')) {
-//        exclude group: 'com.google.firebase', module: 'firebase-iid'
-//    }
-    implementation 'com.android.support:multidex:1.0.3'
-    testImplementation "junit:junit:$junit_version"
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+//    testImplementation "junit:junit:$junit_version"
+//    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+//    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 }
 
 apply plugin: 'com.google.gms.google-services'

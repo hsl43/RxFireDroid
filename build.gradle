@@ -14,11 +14,11 @@ buildscript {
         rxkotlin2_version          = '2.3.0'
         firebase_core_version      = '16.0.4'
         firebase_auth_version      = '16.0.4'
-        firebase_config_version    = '16.0.0'
+        firebase_config_version    = '16.0.1'
         firebase_database_version  = '16.0.3'
         firebase_firestore_version = '17.1.1'
         firebase_messaging_version = '17.3.3'
-        firebase_storage_version   = '16.0.2'
+        firebase_storage_version   = '16.0.3'
         player_services_version    = '16.0.1'
         junit_version              = '4.12'
         assertj_version            = '3.9.1'
@@ -33,9 +33,10 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:3.2.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath 'com.google.gms:google-services:4.0.1'
+        classpath 'com.google.gms:google-services:4.1.0'
         classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
         classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.4'
+        classpath 'com.google.android.gms:strict-version-matcher-plugin:1.0.3'
     }
 }
 
@@ -46,7 +47,6 @@ allprojects {
 
         configurations.all {
             resolutionStrategy {
-//                force 'com.google.firebase:firebase-iid:17.0.2'
                 force 'com.google.android.gms:play-services-basement:15.0.1'
             }
         }
