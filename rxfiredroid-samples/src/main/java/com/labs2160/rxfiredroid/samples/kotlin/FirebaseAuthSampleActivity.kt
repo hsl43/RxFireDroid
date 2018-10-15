@@ -12,7 +12,7 @@ import com.labs2160.rxfiredroid.samples.R
 import com.twitter.sdk.android.core.identity.TwitterLoginButton
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.subscribeBy
-import kotlinx.android.synthetic.main.firebase_auth_demo_activity.*
+import kotlinx.android.synthetic.main.firebase_auth_activity.*
 
 class FirebaseAuthSampleActivity : FirebaseAuthAppCompatActivity() {
   private val disposables = CompositeDisposable()
@@ -20,7 +20,7 @@ class FirebaseAuthSampleActivity : FirebaseAuthAppCompatActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
 
-    setContentView(R.layout.firebase_auth_demo_activity)
+    setContentView(R.layout.firebase_auth_activity)
 
     val tag = javaClass.name
 

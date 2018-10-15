@@ -21,7 +21,7 @@ public class FirebaseAuthSampleActivity extends FirebaseAuthAppCompatActivity {
   protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
 
-    setContentView(R.layout.firebase_auth_demo_activity);
+    setContentView(R.layout.firebase_auth_activity);
 
     final String tag = getClass().getName();
 
