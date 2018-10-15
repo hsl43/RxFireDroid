@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -67,6 +68,18 @@ class FirebaseCloudMessagingSampleActivity : AppCompatActivity() {
     firebaseMessaging = FirebaseMessaging.getInstance()
 
     setContentView(R.layout.firebase_messaging_activity)
+
+    disposables.add(
+        firebaseMessaging.rxBindRegistrationToken()
+            .subscribeBy(
+                onNext = { token ->
+                  messaging_registration_token_text_view.text = token
+                },
+                onError = { error ->
+                  Log.e(javaClass.name, "## Error binding registration token", error)
+                }
+            )
+    )
 
     recyclerViewAdapter = TopicsListRecyclerViewAdapter()
 

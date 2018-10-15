@@ -2,7 +2,10 @@ package com.labs2160.rxfiredroid.messaging
 
 import com.google.android.gms.tasks.Task
 import com.google.firebase.messaging.RemoteMessage
+import com.labs2160.rxfiredroid.Defaults
+import io.reactivex.BackpressureStrategy
 import io.reactivex.Completable
+import io.reactivex.Flowable
 import com.google.firebase.messaging.FirebaseMessaging as GoogleFirebaseMessaging
 
 interface FirebaseMessaging {
@@ -26,6 +29,20 @@ interface FirebaseMessaging {
    * Determine whether FCM auto-initialization is enabled or disabled.
    */
   fun isAutoInitEnabled(): Boolean
+
+  /**
+   * Observe generated FCM registration tokens with a defaulted backpressure
+   * strategy.
+   */
+  @Suppress("unused")
+  fun rxBindRegistrationToken(): Flowable<String> {
+    return this.rxBindRegistrationToken(Defaults.BACKPRESSURE_STRATEGY)
+  }
+
+  /**
+   * Observe generated FCM registration tokens.
+   */
+  fun rxBindRegistrationToken(backpressureStrategy: BackpressureStrategy): Flowable<String>
 
   /**
    * Subscribes to topic in the background.

@@ -6,7 +6,9 @@
   <string name="main_menu_firestore_sample">Cloud Firestore Sample</string>
   <string name="main_menu_messaging_sample">Cloud Messaging Sample</string>
 
-  <string name="messaging_instructions">To test message handling, you can send notification messages through the Firebase console. The registration token, if displayed below, can be used to send device-specific messages. Alternatively, topics can be subscribed to for sending topic-specific messages.</string>
+  <string name="messaging_instructions">To test message handling, you can send notification messages through the Firebase console.
+    \n\n<b>&#183;</b> Registration tokens can be observed through the enhanced <b>FirebaseMessagingService</b>, and can be used to send device-specific messages.
+    \n\n<b>&#183;</b> Topic-specific messages can be received by subscribing to the associated topic(s).</string>
   <string name="messaging_registration_token_header">Registration Token</string>
   <string name="messaging_subscribed_topics_header">Subscribed Topics</string>
   <string name="messaging_add_topic_hint">Enter topic name</string>

@@ -3,11 +3,17 @@ package com.labs2160.rxfiredroid.messaging
 import com.google.android.gms.tasks.Task
 import com.google.firebase.messaging.RemoteMessage
 import com.labs2160.rxfiredroid.addRxOnCompleteListener
+import io.reactivex.BackpressureStrategy
 import io.reactivex.Completable
+import io.reactivex.Flowable
 import com.google.firebase.messaging.FirebaseMessaging as GoogleFirebaseMessaging
 
 @Suppress("unused")
 internal class FirebaseMessagingImpl(private val delegate: GoogleFirebaseMessaging) : FirebaseMessaging {
+  override fun rxBindRegistrationToken(backpressureStrategy: BackpressureStrategy): Flowable<String> {
+    return Streams.bindRegistrationToken(backpressureStrategy)
+  }
+
   override fun isAutoInitEnabled(): Boolean {
     return delegate.isAutoInitEnabled
   }
